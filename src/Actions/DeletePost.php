@@ -47,8 +47,8 @@ class DeletePost extends BaseAction
         }
 
         // Update sequence numbers for all of the thread's posts
-        $this->post->thread->posts->each(function ($p) {
-            $p->updateWithoutTouch(['sequence' => $p->getSequenceNumber()]);
+        $this->post->thread->posts->each(function ($p, $i) {
+            $p->updateWithoutTouch(['sequence' => $i + 1]);
         });
 
         return $this->post;
