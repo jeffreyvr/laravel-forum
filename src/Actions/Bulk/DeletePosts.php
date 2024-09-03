@@ -83,8 +83,8 @@ class DeletePosts extends BaseAction
                         'reply_count' => DB::raw("reply_count - {$threadPostsRemoved}"),
                     ]);
 
-                    $thread->posts->each(function ($p) {
-                        $p->updateWithoutTouch(['sequence' => $p->getSequenceNumber()]);
+                    $thread->posts->each(function ($p, $i) {
+                        $p->updateWithoutTouch(['sequence' => $i + 1]);
                     });
                 }
             }
